@@ -16,11 +16,12 @@ gem "mysql2",          "~> 0.5"
 gem "concurrent-ruby", "1.3.4"
 
 group :development, :test do
-  gem "reline", "0.5.10"
-  gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
+  gem "reline",        "0.5.10"
+  gem "debug",         "1.7.1", platforms: %i[ mri mingw x64_mingw ]
   # brakeman入れたかったら事前にターミナル上でbundle installが必要
-  gem "brakeman", require: false
+  gem "brakeman",      require: false
   gem "rubocop-rails-omakase", require: false
+  gem "rspec-rails",   "~> 8.0.0"
 end
 
 group :development do
