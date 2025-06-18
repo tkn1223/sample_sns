@@ -6,9 +6,9 @@ RSpec.describe "Some test", type: :request do
     @base_title = "Ruby on Rails Tutorial Sample App"
   end
 
-  describe "GET /home" do
+  describe "GET /" do
     it "returns http success" do
-      get static_pages_home_path
+      get root_path
       expect(response).to have_http_status(200)
 
       html = Nokogiri::HTML(response.body)
