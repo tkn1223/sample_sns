@@ -10,13 +10,12 @@ RSpec.describe "Some test", type: :request do
     it "returns http success" do
       get static_pages_home_path
       expect(response).to have_http_status(200)
-      
+
       html = Nokogiri::HTML(response.body)
       title = html.at('title').text
       expect(title).to eq("Home | #{@base_title}")
     end
   end
-
 
   describe "GET /help" do
     it "returns http success" do
