@@ -9,7 +9,6 @@ RSpec.describe "StaticPages", type: :request do
   end
 end
 
-
 RSpec.describe "StaticPages", type: :request do
   describe "GET /help" do
     it "returns http success" do
