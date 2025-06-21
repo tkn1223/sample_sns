@@ -8,6 +8,8 @@ services:
       - 3000:3000
     depends_on:
       - db
+    tty: true
+
   db:
     image: mysql:8.0
     volumes:
@@ -17,5 +19,6 @@ services:
       MYSQL_DATABASE: app_production
       MYSQL_USER: app_user
       MYSQL_PASSWORD: app_password
+
 volumes:
   db-volume:
