@@ -13,7 +13,7 @@ RSpec.describe "Some test", type: :request do
 
       html = Nokogiri::HTML(response.body)
       title = html.at('title').text
-      expect(title).to eq("Home | #{@base_title}")
+      expect(title).to eq("#{@base_title}")
     end
   end
 
