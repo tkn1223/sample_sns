@@ -28,6 +28,8 @@ group :development do
   gem "web-console",         "4.2.0"
   gem "solargraph",          "0.53.4"
   gem "repl_type_completor", "0.1.2"
+  gem "guard"
+  gem "guard-rspec",         require: false
 end
 
 group :test do
@@ -37,8 +39,8 @@ group :test do
   gem "rails-controller-testing", "1.0.5"
   gem "minitest",                 "5.18.0"
   gem "minitest-reporters",       "1.6.0"
-  gem "guard",                    "2.18.0"
-  gem "guard-minitest",           "2.4.6"
+  # gem "guard",                    "2.18.0"
+  # gem "guard-minitest",           "2.4.6"
 end
 
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
