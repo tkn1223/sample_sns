@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "SiteLayout", type: :request do
     describe "Get / (root_path)" do
         before { get root_path }
-        
+
         it "renders the home template" do
             expect(response).to render_template(:home)
         end
