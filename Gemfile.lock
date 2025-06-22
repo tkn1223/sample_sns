@@ -133,8 +133,9 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
+    importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.8.0)
     irb (1.15.2)
@@ -412,7 +413,7 @@ DEPENDENCIES
   debug (= 1.7.1)
   guard
   guard-rspec
-  importmap-rails (= 1.1.5)
+  importmap-rails (= 2.1.0)
   jbuilder (= 2.11.5)
   minitest (= 5.18.0)
   minitest-reporters (= 1.6.0)
