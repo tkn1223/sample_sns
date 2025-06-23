@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(name: "Example User", email: "user@example.com",
+                     password: "foobarbaz", password_confirmation: "foobarbaz")
   end
 
   it "ユーザー情報がバリデーションを満たしているか確認" do
@@ -48,5 +49,15 @@ RSpec.describe User, type: :model do
     @user.email = mixed_case_email
     @user.save
     expect(@user.reload.email).to eq mixed_case_email.downcase
+  end
+
+  it "パスワードがから出ないことを確認" do
+    @user.password = @user.password_confirmation = "" * 8
+    expect(@user).not_to be_valid
+  end
+
+  it "パスワードが5文字以上あることを確認" do
+    @user.password = @user.password_confirmation = "a" * 8
+    expect(@user).not_to be_valid
   end
 end
