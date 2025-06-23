@@ -36,4 +36,17 @@ RSpec.describe User, type: :model do
       expect(@user).not_to be_valid
     end
   end
+
+  it "emailの重複を確認" do
+    duplicate_user = @user.dup
+    @user.save
+    expect(duplicate_user).not_to be_valid
+  end
+
+  it "emailは小文字で保存される" do
+    mixed_case_email = "Foo@ExAMPle.CoM"
+    @user.email = mixed_case_email
+    @user.save
+    expect(@user.reload.email).to eq mixed_case_email.downcase
+  end
 end
