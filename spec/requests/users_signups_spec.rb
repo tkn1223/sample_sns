@@ -4,7 +4,7 @@ RSpec.describe "UsersSignups", type: :request do
   describe "POST /users_signups" do
     it "入力されたユーザー情報が正しくないとき、DBに登録しない" do
       get signup_path
-      expect{
+      expect {
         post users_path, params: {
           user: {
             name: "",
