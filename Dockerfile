@@ -4,23 +4,29 @@ FROM ruby:3.2.8-slim
 # パッケージのインストール
 RUN apt-get update -qq && \
     # 指定したパッケージをインストール
-    apt-get install --no-install-recommends -y curl \
-    # MYSQLサーバー
-    # default-libmysqlclient-dev \
-    libmariadb-dev \
-    g++ \
-    make \
-    libyaml-dev \
-    tzdata \
-    git && \
+        apt-get install --no-install-recommends -y curl \
+        # MYSQLサーバー
+        # default-libmysqlclient-dev \
+        curl \
+        g++ \
+        git \
+        libmariadb-dev \
+        libpq-dev \
+        libssl-dev \
+        libyaml-dev \
+        make \
+        tzdata \
     # APTで使用したキャッシュファイルやメタデータを削除して、イメージサイズを小さく保つ
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# コンテナ起動時の作業ディレクトリを指定
+# ---- Bundler 設定 ----
+# 本番用だけインストール（development と test を除外）
+ENV BUNDLE_WITHOUT="development test"
+
+# ---- アプリケーション ----
 WORKDIR /app
-
-# PC上のファイルを.（/app）にコピー
 COPY Gemfile Gemfile.lock ./
-
 RUN bundle install
+
+COPY . .
 
