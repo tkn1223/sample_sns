@@ -18,5 +18,20 @@ RSpec.describe "UsersLogins", type: :request do
       # フラッシュがクリアされていること
       expect(flash[:danger]).to be_nil
     end
+
+    # ログイン前後のトグル表記についてテスト（未実装）
+
+    let(:user) { FactoryBot.create(:user) }
+
+    it "未ログイン時にはaccountメニューが表示されないことを確認" do
+      get root_path
+      expect(response.body).not_to include('id="account"')
+    end
+
+    it "ログイン後にaccountメニューが表示されることを確認" do
+      log_in_as(user)
+      get root_path
+      expect(response.body).to include('id="account"')
+    end
   end
 end
