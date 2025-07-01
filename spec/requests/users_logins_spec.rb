@@ -24,14 +24,21 @@ RSpec.describe "UsersLogins", type: :request do
     let(:user) { FactoryBot.create(:user) }
 
     it "未ログイン時にはaccountメニューが表示されないことを確認" do
-      get root_path
+      get root_path  # もしくは get login_path など、未ログインでアクセス
       expect(response.body).not_to include('id="account"')
     end
 
-    it "ログイン後にaccountメニューが表示されることを確認" do
-      log_in_as(user)
-      get root_path
-      expect(response.body).to include('id="account"')
+    it "ログイン時にはaccountメニューが表示されることを確認" do
+      post login_path, params: { sessions: { email: user.email, password: "pass00word" } }
+      expect(response).to redirect_to(user)
+
+      # リダイレクト先へ移動
+      follow_redirect!
+      expect(response).to render_template("users/show")
+
+      # HTMLのリンクが正しく存在することを確認
+      expect(response.body).to include("href=\"#{logout_path}\"")
+      expect(response.body).to include("href=\"#{user_path(user)}\"")
     end
   end
 end
