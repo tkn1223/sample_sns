@@ -19,17 +19,16 @@ RSpec.describe "UsersLogins", type: :request do
       expect(flash[:danger]).to be_nil
     end
 
-    # ログイン前後のトグル表記についてテスト（未実装）
+    let!(:user) { FactoryBot.create(:user) }
 
-    let(:user) { FactoryBot.create(:user) }
-
+    # ログイン前後のトグル表記についてテスト
     it "未ログイン時にはaccountメニューが表示されないことを確認" do
       get root_path  # もしくは get login_path など、未ログインでアクセス
       expect(response.body).not_to include('id="account"')
     end
 
     it "ログイン時にはaccountメニューが表示されることを確認" do
-      post login_path, params: { sessions: { email: user.email, password: "pass00word" } }
+      post login_path, params: { sessions: { email: user.email, password: user.password } }
       expect(response).to redirect_to(user)
 
       # リダイレクト先へ移動
@@ -42,3 +41,4 @@ RSpec.describe "UsersLogins", type: :request do
     end
   end
 end
+
