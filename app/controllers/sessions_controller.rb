@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:sessions][:email].downcase)
     if user&.authenticate(params[:sessions][:password])
       reset_session
+      remember user
       log_in user
       redirect_to user
     else
