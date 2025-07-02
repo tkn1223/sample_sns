@@ -60,4 +60,8 @@ RSpec.describe User, type: :model do
     @user.password = @user.password_confirmation = "a" * 8
     expect(@user).not_to be_valid
   end
+
+  it "digestがnilの場合はfalseを返す" do
+    expect(@user.authenticated?('')).to be false
+  end
 end
