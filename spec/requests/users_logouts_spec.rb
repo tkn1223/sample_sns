@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "UsersLogouts", type: :request do
   describe "GET /logout" do
-
     let!(:user) { FactoryBot.create(:user) }
 
     before do

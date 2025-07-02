@@ -6,7 +6,7 @@ RSpec.describe "UsersLogins", type: :request do
       get login_path
       expect(response).to render_template(:new)
 
-      post login_path, params: { sessions: { email: "",password: "" } }
+      post login_path, params: { sessions: { email: "", password: "" } }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(:new)
 
@@ -14,7 +14,7 @@ RSpec.describe "UsersLogins", type: :request do
       expect(flash[:danger]).to be_present
 
       get root_path
-      
+
       # フラッシュがクリアされていること
       expect(flash[:danger]).to be_nil
     end
@@ -41,4 +41,3 @@ RSpec.describe "UsersLogins", type: :request do
     end
   end
 end
-

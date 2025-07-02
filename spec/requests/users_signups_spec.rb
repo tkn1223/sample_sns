@@ -38,7 +38,7 @@ RSpec.describe "UsersSignups", type: :request do
       follow_redirect!
       expect(response.body).to include("Exampleuser")
       expect(flash[:success]).to eq("ユーザー登録が完了しました")
-      
+
       # ログイン後の表示になっていることを確認（'と"の使い分けに注意）
       expect(response.body).to include('id="account"')
     end
