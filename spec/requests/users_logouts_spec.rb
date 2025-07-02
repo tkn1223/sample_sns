@@ -26,6 +26,11 @@ RSpec.describe "UsersLogouts", type: :request do
       follow_redirect!
       # ログインリンクがあることを確認
       expect(response.body).to include("href=\"#{login_path}\"")
+
+      # ２重ログアウトの確認
+      delete logout_path
+      follow_redirect!
+      expect(response.body).to include("href=\"#{login_path}\"")
     end
   end
 end
