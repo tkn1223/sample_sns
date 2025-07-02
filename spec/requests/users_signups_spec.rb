@@ -4,7 +4,7 @@ RSpec.describe "UsersSignups", type: :request do
   describe "POST /users_signups" do
     it "入力されたユーザー情報が正しくないとき、DBに登録しない" do
       get signup_path
-      expect{
+      expect {
         post users_path, params: {
           user: {
             name: "",
@@ -38,7 +38,7 @@ RSpec.describe "UsersSignups", type: :request do
       follow_redirect!
       expect(response.body).to include("Exampleuser")
       expect(flash[:success]).to eq("ユーザー登録が完了しました")
-      
+
       # ログイン後の表示になっていることを確認（'と"の使い分けに注意）
       expect(response.body).to include('id="account"')
     end
