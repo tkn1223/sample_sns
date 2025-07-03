@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "UsersLogins", type: :request do
+  let(:user) { create(:user) }
+
   describe "GET /login" do
     it "ログインページのフラッシュが他画面に残らないか確認" do
       get login_path
       expect(response).to render_template(:new)
 
-      post login_path, params: { sessions: { email: "", password: "" } }
+      post login_path, params: { session: { email: "", password: "" } }
       expect(response).to have_http_status(:unprocessable_entity)
       expect(response).to render_template(:new)
 
@@ -19,8 +21,6 @@ RSpec.describe "UsersLogins", type: :request do
       expect(flash[:danger]).to be_nil
     end
 
-    let!(:user) { FactoryBot.create(:user) }
-
     # ログイン前後のトグル表記についてテスト
     it "未ログイン時にはaccountメニューが表示されないことを確認" do
       get root_path  # もしくは get login_path など、未ログインでアクセス
@@ -28,7 +28,7 @@ RSpec.describe "UsersLogins", type: :request do
     end
 
     it "ログイン時にはaccountメニューが表示されることを確認" do
-      post login_path, params: { sessions: { email: user.email, password: user.password } }
+      post login_path, params: { session: { email: user.email, password: user.password } }
       expect(response).to redirect_to(user)
 
       # リダイレクト先へ移動
@@ -38,6 +38,26 @@ RSpec.describe "UsersLogins", type: :request do
       # HTMLのリンクが正しく存在することを確認
       expect(response.body).to include("href=\"#{logout_path}\"")
       expect(response.body).to include("href=\"#{user_path(user)}\"")
+    end
+
+    it "rememberme機能を使用してログインできたか確認" do
+      log_in_as(user, remember_me: '1')
+      expect(cookies[:remember_token]).not_to be_blank
+    end
+  end
+  
+  describe "remember me機能の確認" do
+    it "remember meを使ってログインを確認" do
+      log_in_as(user, remember_me: '1')
+      expect(cookies[:remember_token]).not_to be_blank
+    end
+
+    it "remember meの削除を確認" do
+      # Cookieを保存してログイン
+      log_in_as(user, remember_me: '1')
+      # Cookieを削除して再ログイン
+      log_in_as(user, remember_me: '0')
+      expect(cookies[:remember_token]).to be_blank
     end
   end
 end

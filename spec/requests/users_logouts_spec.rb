@@ -5,7 +5,7 @@ RSpec.describe "UsersLogouts", type: :request do
     let!(:user) { FactoryBot.create(:user) }
 
     before do
-      post login_path, params: { sessions: { email: user.email, password: user.password } }
+      post login_path, params: { session: { email: user.email, password: user.password } }
     end
 
     it "ログアウトが正しく実行されることを確認" do
