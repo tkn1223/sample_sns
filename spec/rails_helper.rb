@@ -5,12 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-
-begin
-  ActiveRecord::Migration.maintain_test_schema!
-rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
-end
+require 'capybara/rspec'
 
 # support以下を読み込む
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
@@ -25,4 +20,12 @@ RSpec.configure do |config|
   # test_helpers.rbを継承
   config.include TestHelpers, type: :request
   config.include TestHelpers, type: :controller
+  # systemテストの継承（永続化cookiesの動作確認など）
+  config.include ShowMeTheCookies, type: :system
+
+  # system spec 用ドライバ設定
+  config.before(:each, type: :system) do |example|
+    # JavaScript が不要なら rack_test（高速）、必要なら Selenium + Chrome ヘッドレス
+    driven_by example.metadata[:js] ? :selenium_chrome_headless : :rack_test
+  end
 end
