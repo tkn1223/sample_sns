@@ -41,6 +41,7 @@ RSpec.describe "UsersSignups", type: :request do
 
       # ログイン後の表示になっていることを確認（'と"の使い分けに注意）
       expect(response.body).to include('id="account"')
+      expect(is_logged_in?).to be true
     end
   end
 end
