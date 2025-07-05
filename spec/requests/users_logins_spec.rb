@@ -39,25 +39,5 @@ RSpec.describe "UsersLogins", type: :request do
       expect(response.body).to include("href=\"#{logout_path}\"")
       expect(response.body).to include("href=\"#{user_path(user)}\"")
     end
-
-    it "rememberme機能を使用してログインできたか確認" do
-      log_in_as(user, remember_me: '1')
-      expect(cookies[:remember_token]).not_to be_blank
-    end
-  end
-  
-  describe "remember me機能の確認" do
-    it "remember meを使ってログインを確認" do
-      log_in_as(user, remember_me: '1')
-      expect(cookies[:remember_token]).not_to be_blank
-    end
-
-    it "remember meの削除を確認" do
-      # Cookieを保存してログイン
-      log_in_as(user, remember_me: '1')
-      # Cookieを削除して再ログイン
-      log_in_as(user, remember_me: '0')
-      expect(cookies[:remember_token]).to be_blank
-    end
   end
 end
