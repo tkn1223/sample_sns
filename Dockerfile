@@ -21,7 +21,7 @@ RUN apt-get update -qq && \
 
 # ---- Bundler 設定 ----
 # 本番用だけインストール（development と test を除外）
-ENV BUNDLE_WITHOUT="development test"
+# ENV BUNDLE_WITHOUT="development test"
 
 # ---- アプリケーション ----
 WORKDIR /app

@@ -8,7 +8,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 
 # support以下を読み込む
-Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.fixture_paths = [Rails.root.join('spec/fixtures')]

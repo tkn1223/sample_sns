@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "UsersEdits", type: :request do
+  # factorise>users.rbに沿ってユーザーを1人追加
   let(:user) { FactoryBot.create(:user) }
 
   describe "GET /users/:id/edit" do
-    it "無効な値で更新した時にレンダリングされることを確認" do
+    it "無効な値では更新できない（レンダリングされる）ことを確認" do
+      log_in_as(user, password: "pass00word")
       get edit_user_path(user)
       expect(response).to render_template(:edit)
 
@@ -26,9 +28,11 @@ RSpec.describe "UsersEdits", type: :request do
       new_name = "test10"
       new_email = "test@bar.com"
 
+      log_in_as(user, password: "pass00word")
       get edit_user_path(user)
       expect(response).to render_template(:edit)
 
+      # 有効なアカウント情報を入力
       patch user_path(user), params: {
         user: {
           name: new_name,
