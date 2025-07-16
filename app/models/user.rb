@@ -27,6 +27,13 @@ class User < ApplicationRecord
     def remember
         self.remember_token = User.new_token
         update_attribute(:remember_digest, User.digest(remember_token))
+        remember_digest
+    end
+
+    # セッションハイジャック防止のためにセッショントークを返す
+    # この記憶ダイジェストを再利用七得るのは単に利便性のため
+    def session_token
+        remember_digest || remember
     end
 
     # ブラウザから渡されたトークンがDB内のdigestと一致したらtrueを返す
