@@ -18,7 +18,7 @@ module SessionsHelper
         # セッション内にuser_idが存在するか確認
         if (user_id = session[:user_id])
             user = User.find_by(id: user_id)
-            if user && ssession[:session_token] == user.session_token
+            if user && session[:session_token] == user.session_token
                 @current_user = user
             end
         # remember me機能が使えるか確認
@@ -29,6 +29,10 @@ module SessionsHelper
                 @current_user = user
             end
         end
+    end
+
+    def current_user?(user)
+        user && user == current_user
     end
 
     # ユーザーがログインしていればtrue、その他ならfalseを返す
