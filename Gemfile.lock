@@ -113,7 +113,7 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.6.2)
     drb (2.2.3)
-    erb (5.0.1)
+    erb (5.0.2)
     erubi (1.13.1)
     execjs (2.10.0)
     factory_bot (6.5.4)
@@ -143,10 +143,11 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.1.5)
+    importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.8.0)
+    io-console (0.8.1)
     irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
@@ -272,7 +273,7 @@ GEM
       ffi (~> 1.0)
     rbs (3.9.4)
       logger
-    rdoc (6.14.1)
+    rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -430,7 +431,7 @@ DEPENDENCIES
   faker (= 2.21.0)
   guard
   guard-rspec
-  importmap-rails (= 1.1.5)
+  importmap-rails (= 2.1.0)
   jbuilder (= 2.11.5)
   minitest (= 5.18.0)
   minitest-reporters (= 1.6.0)
