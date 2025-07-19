@@ -41,7 +41,16 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+  # プレビュー機能
+  config.action_mailer.show_previews = true
+
+  # プレビューを探すディレクトリを spec 以下に切り替え
+  config.action_mailer.preview_paths = [
+    Rails.root.join("spec/mailers/previews")
+  ]
+
+  host = 'localhost:3000'
+  config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
