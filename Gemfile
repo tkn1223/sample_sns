@@ -32,7 +32,7 @@ end
 
 group :development do
   gem "web-console",         "4.2.0"
-  gem "solargraph",          "0.53.4"
+  gem "solargraph",          "0.55.4"
   gem "repl_type_completor", "0.1.2"
   gem "guard"
   gem "guard-rspec",         require: false
