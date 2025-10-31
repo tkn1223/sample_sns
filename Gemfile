@@ -18,7 +18,7 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "~> 6.4"
 gem "bootsnap",        "1.16.0", require: false
 gem "mysql2",          "~> 0.5"
-gem "concurrent-ruby", "1.3.4"
+gem "concurrent-ruby", "1.3.5"
 
 group :development, :test do
   gem "reline",        "0.5.10"
